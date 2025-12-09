@@ -1,4 +1,4 @@
-/* ================= Header ================= */
+/* Header  */
 #header {
     display: flex;
     align-items: center;
@@ -14,7 +14,7 @@
 }
 
 .logo {
-    max-height: 60px; /* ensures logo fits header */
+    max-height: 60px; 
     width: auto;
     display: block;
 }
@@ -63,7 +63,7 @@
     left: 20px;
 }
 
-/* ================= Hero Section ================= */
+/*  Hero Section */
 #hero {
     background-image: url("img/background.avif");
     height: 90vh;
@@ -86,7 +86,7 @@
 }
 
 #hero h1 {
-    color: brown; /* your custom color */
+    color: brown; 
 }
 
 #hero button {
@@ -125,7 +125,7 @@
     }
 }
 
-/* ================= Features Section ================= */
+/* Features Section */
 .section-p1 {
     padding: 40px 80px;
 }
@@ -174,7 +174,7 @@
     background-color: blueviolet;
 }
 
-/* ================= Products Section ================= */
+/* Products Section */
 #products {
     padding: 40px 80px;
     display: flex;
@@ -219,7 +219,7 @@
     background-color: teal;
 }
 
-/* ================= Responsive Header & Products ================= */
+
 @media screen and (max-width: 1024px) {
     .product-card {
         width: 48%;
@@ -239,7 +239,7 @@
         padding: 10px 0;
     }
 }
-/* ================= Contact Form ================= */
+/* contact form*/
 .contact-container {
     max-width: 600px;
     margin: 50px auto;
@@ -300,7 +300,6 @@
     font-weight: bold;
 }
 
-/* ================= Responsive ================= */
 @media screen and (max-width: 768px) {
     .contact-container {
         margin: 30px 20px;
