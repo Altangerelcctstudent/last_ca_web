@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section id="header"> 
+        <a href="#"><img src="img/logo.png" class="logo" alt=""></a>
+        <p> AG FASHION ONLINE SHOP</p>
+        <div>
+            <ul id="navbar">
+                <li><a class="active" href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+            </ul>
+        </div>
+    </section>
+    <section id="hero">
+        <h4> Trade-in-offer</h4>
+        <h2> Super value deals</h2>
+        <h1> On all products</h1>
+        <p> Save more with our loyalty card up to 40% off</p>
+        <button onclick="window.location.href='shop.html'">Shop Now !!!</button> 
+    </section>
+    <section id="feature" class="section-p1">
+        <div class="fe-box"> <img src="img/feature1.png" alt="">
+            <h6>Free Delivery</h6>
+        </div>
+        <div class="fe-box"> <img src="img/feature2.avif" alt="">
+            <h6>Guaranteed</h6>
+        </div>
+        <div class="fe-box"> <img src="img/feature3.png" alt="">
+            <h6>Online payment</h6>
+        </div>
+    </section>
+
+    <script>
+        async function loadProducts() {
+            const res = await fetch("/api/products");
+            const products = await res.json();
+
+            document.getElementById("products").innerHTML =
+                products.map(p => `
+            <div style="border:1px solid #ccc;padding:10px;margin:10px;">
+                <img src="${p.image}" width="120">
+                <h3>${p.title}</h3>
+                <p>$${p.price}</p>
+                <button onclick="addToCart(${p.id})">Add to Cart</button>
+            </div>
+        `).join("");
+        }
+
+        async function addToCart(id) {
+            await fetch("/api/cart/add", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ product_id: id })
+            });
+            alert("Added to cart!");
+        }
+
+        loadProducts();
+    </script>
+
+</body>
+
+</html>

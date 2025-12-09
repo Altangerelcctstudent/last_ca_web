@@ -1,0 +1,310 @@
+/* ================= Header ================= */
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: rgb(37, 80, 80);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+    z-index: 999;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logo {
+    max-height: 60px; /* ensures logo fits header */
+    width: auto;
+    display: block;
+}
+
+#header p {
+    margin: 0;
+    text-align: center;
+    color: whitesmoke;
+    font-size: 24px;
+    flex: 1;
+}
+
+#navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#navbar li {
+    list-style: none;
+    padding: 0 15px;
+    position: relative;
+}
+
+#navbar li a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+    transition: 0.5s ease;
+}
+
+#navbar li a:hover,
+#navbar li a.active {
+    color: azure;
+}
+
+#navbar li a.active::after,
+#navbar li a:hover::after {
+    content: " ";
+    width: 30%;
+    height: 2px;
+    background: aquamarine;
+    position: absolute;
+    bottom: -4px;
+    left: 20px;
+}
+
+/* ================= Hero Section ================= */
+#hero {
+    background-image: url("img/background.avif");
+    height: 90vh;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+#hero h4, #hero h2, #hero h1, #hero p {
+    margin: 0 0 15px 0;
+    color: black;
+    font-size: 25px;
+}
+
+#hero h1 {
+    color: brown; /* your custom color */
+}
+
+#hero button {
+    background-image: url("img/button.webp");
+    background-color: transparent; 
+    color: black;    
+    border: 0; 
+    padding: 14px 80px 14px 65px;  
+    background-repeat: no-repeat; 
+    cursor: pointer; 
+    font-weight: 600;      
+    font-size: 16px;
+    background-size: 100% 100%;
+}
+
+/* Responsive Hero */
+@media screen and (max-width: 768px) {
+    #hero {
+        padding: 0 20px;
+        height: 70vh;
+        align-items: center;
+        text-align: center;
+    }
+
+    #hero button {
+        padding: 10px 50px 10px 40px;
+        font-size: 14px;
+    }
+
+    #header p {
+        font-size: 18px;
+    }
+
+    #navbar li {
+        padding: 0 10px;
+    }
+}
+
+/* ================= Features Section ================= */
+.section-p1 {
+    padding: 40px 80px;
+}
+
+#feature {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#feature .fe-box {
+    width: 180px;
+    text-align: center;
+    padding: 25px 15px;
+    box-shadow: 20px 20px 34px rgba(0, 0,0, 0.03);
+    border: 1px solid #cce7d0;
+    border-radius: 4px;
+    margin: 15px 0;
+}
+
+.fe-box img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+#feature .fe-box:hover {
+    box-shadow: 10px 10px 54px rgba(70, 62, 211, 0.1);
+}
+
+#feature .fe-box h6 {
+    padding: 9px 8px 6px 8px;
+    line-height: 2;
+    border-radius: 10px;
+    color: black;
+    background-color: aquamarine;
+    font-size: 12px;
+}
+
+#feature .fe-box:nth-child(2) h6 {
+    background-color: aqua;
+}
+
+#feature .fe-box:nth-child(3) h6 {
+    background-color: blueviolet;
+}
+
+/* ================= Products Section ================= */
+#products {
+    padding: 40px 80px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product-card {
+    width: 23%;
+    min-width: 240px;
+    padding: 15px;
+    border: 1px solid #cce7d0;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 5px 10px 30px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
+}
+
+.product-card:hover {
+    box-shadow: 5px 10px 40px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+}
+
+.product-card button {
+    padding: 10px 20px;
+    background-color: rgb(37, 80, 80);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.product-card button:hover {
+    background-color: teal;
+}
+
+/* ================= Responsive Header & Products ================= */
+@media screen and (max-width: 1024px) {
+    .product-card {
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .product-card {
+        width: 100%;
+    }
+
+    #navbar {
+        flex-direction: column;
+    }
+
+    #navbar li {
+        padding: 10px 0;
+    }
+}
+/* ================= Contact Form ================= */
+.contact-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    border: 1px solid #cce7d0;
+    border-radius: 10px;
+    box-shadow: 5px 10px 30px rgba(0, 0, 0, 0.05);
+    background-color: #f7f7f7;
+}
+
+.contact-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: rgb(37, 80, 80);
+}
+
+.contact-container input,
+.contact-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #cce7d0;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    transition: 0.3s;
+}
+
+.contact-container input:focus,
+.contact-container textarea:focus {
+    border-color: rgb(37, 80, 80);
+    box-shadow: 0 0 5px rgba(37, 80, 80, 0.5);
+}
+
+.contact-container button {
+    padding: 12px 25px;
+    background-color: rgb(37, 80, 80);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    display: block;
+    margin: 15px auto 0 auto;
+}
+
+.contact-container button:hover {
+    background-color: teal;
+}
+
+#successMsg {
+    text-align: center;
+    color: green;
+    display: none;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* ================= Responsive ================= */
+@media screen and (max-width: 768px) {
+    .contact-container {
+        margin: 30px 20px;
+        padding: 20px;
+    }
+}
+

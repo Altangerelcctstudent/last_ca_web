@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HEADER (your existing one) -->
+    <section id="header">
+        <a href="index.html"><img src="img/logo.png" class="logo"></a>
+        <p>AG FASHION ONLINE SHOP</p>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="shop.html">Shop</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+            </ul>
+        </div>
+    </section>
+
+    <h2 style="text-align:center;margin-top:40px;">Our Products</h2>
+
+    <!-- PRODUCT GRID -->
+    <section id="products"></section>
+
+    <script>
+        async function loadProducts() {
+            const res = await fetch('/api/products');
+            const products = await res.json();
+
+            document.getElementById('products').innerHTML =
+                products.map(p => `
+                    <div class="product-card">
+                        <img src="${p.image}" alt="${p.title}">
+                        <h3>${p.title}</h3>
+                        <p>$${p.price}</p>
+                        <button onclick="addToCart(${p.id})">Add to Cart</button>
+                    </div>
+                `).join('');
+        }
+
+        async function addToCart(id) {
+            await fetch('/api/cart/add', {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ product_id: id })
+            });
+            alert("Added to cart!");
+        }
+
+        loadProducts();
+    </script>
+
+</body>
+</html>

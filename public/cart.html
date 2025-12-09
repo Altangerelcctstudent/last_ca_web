@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Shop - Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+     
+        #cart-summary {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #cce7d0;
+            border-radius: 10px;
+            box-shadow: 5px 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            background-color: #f7f7f7;
+        }
+
+        #cart-summary h3 {
+            margin-bottom: 15px;
+        }
+
+        #cart-summary p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        #checkout-btn {
+            padding: 12px 25px;
+            background-color: rgb(37, 80, 80);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        #checkout-btn:hover {
+            background-color: teal;
+        }
+
+        
+        #products {
+            padding: 20px 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .product-card {
+            width: 250px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="header">
+        <a href="index.html"><img src="img/logo.png" class="logo"></a>
+        <p>AG FASHION ONLINE SHOP</p>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a class="active" href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+            </ul>
+        </div>
+    </section>
+
+    <h2 style="text-align:center; margin-top:40px;">Your Shopping Cart</h2>
+
+  
+    <section id="products"></section>
+
+
+    <div id="cart-summary" style="display:none;">
+        <h3>Cart Summary</h3>
+        <p id="total-items">Total Items: 0</p>
+        <p id="total-price">Total Price: $0.00</p>
+        <button id="checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+
+    <script>
+        async function loadCart() {
+            const res = await fetch("/api/cart");
+            const items = await res.json();
+
+            const productsSection = document.getElementById("products");
+            const summary = document.getElementById("cart-summary");
+
+            if (items.length === 0) {
+                productsSection.innerHTML = "<h3 style='text-align:center;'>Your cart is empty</h3>";
+                summary.style.display = "none";
+                return;
+            }
+
+            productsSection.innerHTML = items.map(item => `
+                <div class="product-card">
+                    <img src="${item.image}" alt="${item.title}">
+                    <h3>${item.title}</h3>
+                    <p>$${item.price}</p>
+                    <button onclick="removeItem(${item.id})">Remove</button>
+                </div>
+            `).join("");
+
+        
+            summary.style.display = "block";
+
+            const totalItems = items.length;
+            const totalPrice = items.reduce((sum, item) => sum + parseFloat(item.price), 0).toFixed(2);
+
+            document.getElementById("total-items").textContent = `Total Items: ${totalItems}`;
+            document.getElementById("total-price").textContent = `Total Price: $${totalPrice}`;
+        }
+
+        async function removeItem(id) {
+            await fetch('/api/cart/remove/' + id, { method: 'DELETE' });
+            loadCart();
+        }
+
+        function checkout() {
+            alert("Checkout successful! Total amount will be processed.");
+           
+        }
+
+        loadCart();
+    </script>
+
+</body>
+
+</html>
